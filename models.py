@@ -3,7 +3,7 @@ from django.db import models
 class Chore(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=100, blank=True, default='')
-    description = models.TextField()
+    description = models.TextField(default='', blank=True)
     owner = models.ForeignKey('auth.User', related_name='chores')
     assigned_to = models.ForeignKey('auth.User', related_name='assigned_to', blank=True, null=True)
     assigned = models.BooleanField(default=False)
