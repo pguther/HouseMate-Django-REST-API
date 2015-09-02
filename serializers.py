@@ -9,7 +9,7 @@ class ChoreSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Chore
-        fields = ('id', 'name', 'owner', 'description','assigned_to', 'assigned')
+        fields = ('id', 'name', 'owner', 'description','assigned_to', 'assigned', 'claimed', 'claimed_by', 'completed', 'due_day', 'expired')
 
     owner = serializers.ReadOnlyField(source='owner.username')
     assigned_to = serializers.ReadOnlyField(source='assigned_to.username')
