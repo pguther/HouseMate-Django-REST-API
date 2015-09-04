@@ -11,7 +11,7 @@ class Chore(models.Model):
     due_day = models.TextField(max_length=10, default='')
     expired = models.BooleanField(default=False)
     claimed = models.BooleanField(default=False)
-    claimed_by = models.CharField(max_length=100, blank=True, default='')
+    claimed_by = models.ForeignKey('auth.User', related_name='assigned_chores')
 
     '''
     group_id = models.IntegerField()
