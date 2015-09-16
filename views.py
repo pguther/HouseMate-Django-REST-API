@@ -90,8 +90,35 @@ class AssignChore(APIView):
 
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class CompleteChore(APIView):
+    """
+	Complete a chore
+	"""
+    
+    permission_classes = (permissions.IsAuthenticated,)
 
+    def get_object(self, pk):
+        try:
+            return Chore.objects.get(pk=pk)
+        except Chore.DoesNotExist:
+            raise Http404
+	
+    def put(self, request, pk, format=None):
+        chore = self.get_object(pk)
+        if chore.assigned is True and chore.completed is True:
+            return Response('is already completed')
+        elif chore.assigned is False:
+            return Response('is not assigned')
+        else:
+            seri = ChoreSerializer(chore)
+            serializer = ChoreSerializer(chore, data=seri.data)
 
+            if serializer.is_valid():
+                serializer.save(completed=True)
+                return Response(serializer.data)
+
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+			
 class RemoveAllAssignments(APIView):
     def put(self, request, format=None):
         queryset = Chore.objects.all()

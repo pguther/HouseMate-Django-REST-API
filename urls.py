@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^$', views.ChoreList.as_view()),
     url(r'^(?P<pk>[0-9]+)/$', views.ChoreDetail.as_view()),
     url(r'^assign/(?P<pk>[0-9]+)/$', views.AssignChore.as_view()),
+    url(r'^complete/(?P<pk>[0-9]+)/$', views.CompleteChore.as_view()),
     url(r'^delete_all/$', views.DeleteAllChores.as_view()),
     url(r'^remove_assignments/$', views.RemoveAllAssignments.as_view()),
 ]

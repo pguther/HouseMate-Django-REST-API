@@ -8,10 +8,10 @@ class Chore(models.Model):
     assigned_to = models.ForeignKey('auth.User', related_name='assigned_to', blank=True, null=True)
     assigned = models.BooleanField(default=False)
     completed = models.BooleanField(default=False)
-    due_day = models.TextField(max_length=10, default='')
+    due_day = models.TextField(max_length=10)
     expired = models.BooleanField(default=False)
     claimed = models.BooleanField(default=False)
-    claimed_by = models.ForeignKey('auth.User', related_name='assigned_chores')
+    claimed_by = models.ForeignKey('auth.User', related_name='assigned_chores', blank=True, null=True)
 
     '''
     group_id = models.IntegerField()

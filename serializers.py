@@ -22,6 +22,7 @@ class ChoreSerializer(serializers.ModelSerializer):
         instance.description = validated_data.get('description', instance.description)
         instance.assigned_to = validated_data.get('assigned_to', instance.assigned_to)
         instance.assigned = validated_data.get('assigned', instance.assigned)
+        instance.completed = validated_data.get('completed', instance.completed)
         instance.save()
         return instance
 
