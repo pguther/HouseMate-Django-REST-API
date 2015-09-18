@@ -13,6 +13,7 @@ class ChoreSerializer(serializers.ModelSerializer):
 
     owner = serializers.ReadOnlyField(source='owner.username')
     assigned_to = serializers.ReadOnlyField(source='assigned_to.username')
+    claimed_by = serializers.ReadOnlyField(source='claimed_by.username')
 
     def create(self, validated_data):
         return Chore.objects.create(**validated_data)
@@ -23,6 +24,9 @@ class ChoreSerializer(serializers.ModelSerializer):
         instance.assigned_to = validated_data.get('assigned_to', instance.assigned_to)
         instance.assigned = validated_data.get('assigned', instance.assigned)
         instance.completed = validated_data.get('completed', instance.completed)
+        instance.expired = validated_data.get('expired', instance.expired)
+        instance.claimed = validated_data.get('claimed', instance.claimed)
+        instance.claimed_by = validated_data.get('claimed_by', instance.claimed_by)
         instance.save()
         return instance
 
